@@ -1,2 +1,6 @@
 selfUpdate
 _build.sh
+testselfupdate
+testselfupdate-darwin-arm64
+dist
+version
