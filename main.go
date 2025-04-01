@@ -76,12 +76,13 @@ func getVersion(url string) string {
 	url = url + "/version"
 	resp, err := http.Get(url)
 	if err != nil {
-		panic(err)
+		log.Printf("Failed to access %s, continue...\n", url)
+		return ""
 	}
 	defer resp.Body.Close()
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
-		panic(err)
+		log.Fatalf("Failed to read the body of the http response: %v\n", err)
 	}
 
 	version := strings.Trim(string(body), "\n")
@@ -90,14 +91,16 @@ func getVersion(url string) string {
 
 func checkIsUpdated(url string) bool {
 	newVersion := getVersion(url)
-
+	if newVersion == "" {
+		return true
+	}
 	old, err := strconv.Atoi(Version)
 	if err != nil {
-		panic(err)
+		log.Fatalf("Failed to convert old version %s: %v\n", Version, err)
 	}
 	new, err := strconv.Atoi(newVersion)
 	if err != nil {
-		panic(err)
+		log.Fatalf("Failed to convert new version %s: %v\n", Version, err)
 	}
 
 	if old < new {

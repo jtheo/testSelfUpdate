@@ -2,6 +2,7 @@
 
 - [doc](https://pkg.go.dev/github.com/minio/selfupdate)
 - [repo](https://github.com/minio/selfupdate)
+- [TUF: The Update Framework](https://github.com/theupdateframework/go-tuf)
 
 ## Example
 

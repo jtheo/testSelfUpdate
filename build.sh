@@ -4,6 +4,7 @@ function log() {
   echo "===== $(date) ==> ${*}"
 }
 
+start=$(date +%s)
 log "Running go vet"
 if ! go vet ./...; then
   echo "go vet failed"
@@ -41,7 +42,8 @@ for GOOS in "${oses[@]}"; do
   done
   echo
 done
-
+now=$(date +%s)
+echo "Executed in $((now - start)) seconds"
 version=$((version + 1))
 echo ${version} >version
 echo
